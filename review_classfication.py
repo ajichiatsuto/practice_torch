@@ -115,6 +115,8 @@ for epoch in range(num_epochs):
     model.eval()
     with torch.no_grad():
         for i, (label, line) in enumerate(val_dataloader):
+            if label.shape[0] != batch_size:
+                continue
             label = label.to(device)
             line = line.to(device)
             line = line.transpose(1, 0)
